@@ -1,0 +1,35 @@
+# Node modules
+node_modules/
+
+# Logs
+*.log
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+/node_modules
+
+# Builds
+/dist
+/build
+
+# Temporary files
+*.tmp
+*.temp
+
+# System files
+.DS_Store
+Thumbs.db
+
+# VS Code files
+.vscode/
+*.code-workspace
+
+# Jest coverage
+coverage/
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment variables
+.env
