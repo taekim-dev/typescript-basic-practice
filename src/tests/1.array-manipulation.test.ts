@@ -6,13 +6,13 @@ returns a new array with the integers sorted in ascending order.
 You should not use the built-in Array.prototype.sort method. */
 
 test('empty array', () => {
-    expect([]).toBe([]);
+    expect(arrayManipulation([])).toEqual([]);
 })
 
 test('array with descending order', () => {
-    expect([5,4,3,2,1]).toBe([1,2,3,4,5]);
+    expect(arrayManipulation([5,4,3,2,1])).toEqual([1,2,3,4,5]);
 })
 
 test('array with mixed order', () => {
-    expect([4,3,5,1,2]).toBe([1,2,3,4,5]);
+    expect(arrayManipulation([4,3,5,1,2])).toEqual([1,2,3,4,5]);
 })
