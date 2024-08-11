@@ -5,49 +5,48 @@ Write a function that deep clones a given object.
 The function should be able to handle nested objects, arrays, and primitive data types. */
 
 test('primitive types', () => {
-    expect(deepClone(42)).toBe(42); // Number
-    expect(deepClone("hello")).toBe("hello"); // String
-    expect(deepClone(true)).toBe(true); // Boolean true
-    expect(deepClone(false)).toBe(false); // Boolean false
-    expect(deepClone(null)).toBeNull(); // Null
-    expect(deepClone(undefined)).toBeUndefined(); // Undefined
-    expect(deepClone(BigInt(12345))).toBe(BigInt(12345)); // BigInt
-    expect(deepClone(Symbol('symbol'))).not.toBe(Symbol('symbol')); // Symbol
+    expect(deepClone(42)).toBe(42);
+    expect(deepClone("hello")).toBe("hello");
+    expect(deepClone(true)).toBe(true);
+    expect(deepClone(false)).toBe(false);
+    expect(deepClone(null)).toBeNull();
+    expect(deepClone(undefined)).toBeUndefined();
+    expect(deepClone(BigInt(12345))).toBe(BigInt(12345));
+    expect(deepClone(Symbol('symbol'))).not.toBe(Symbol('symbol'));
 });
 
 test('objects', () => {
-    expect(deepClone({})).toEqual({}); // Empty object
-    expect(deepClone({1: 2})).toEqual({1: 2}); // Simple object with number
-    expect(deepClone({"key": "value"})).toEqual({"key": "value"}); // Simple object with string
-    expect(deepClone({a: 1, b: "text", c: true})).toEqual({a: 1, b: "text", c: true}); // Mixed types
+    expect(deepClone({})).toEqual({});
+    expect(deepClone({1: 2})).toEqual({1: 2});
+    expect(deepClone({"key": "value"})).toEqual({"key": "value"});
+    expect(deepClone({a: 1, b: "text", c: true})).toEqual({a: 1, b: "text", c: true});
 });
 
 test('nested objects', () => {
-    expect(deepClone({"key": {"innerKey": "value"}})).toEqual({"key": {"innerKey": "value"}}); // Nested object
-    expect(deepClone({"key": {1: {2: 3}}})).toEqual({"key": {1: {2: 3}}}); // Deeply nested object
-    expect(deepClone({"key": {1: [{"inner": "value"}]}})).toEqual({"key": {1: [{"inner": "value"}]}}); // Object with array as value
+    expect(deepClone({"key": {"innerKey": "value"}})).toEqual({"key": {"innerKey": "value"}});
+    expect(deepClone({"key": {1: {2: 3}}})).toEqual({"key": {1: {2: 3}}});
+    expect(deepClone({"key": {1: [{"inner": "value"}]}})).toEqual({"key": {1: [{"inner": "value"}]}});
 });
 
 test('arrays', () => {
-    expect(deepClone([])).toEqual([]); // Empty array
-    expect(deepClone([1, 2, 3])).toEqual([1, 2, 3]); // Array of numbers
-    expect(deepClone([1, {"key": "value"}, 2])).toEqual([1, {"key": "value"}, 2]); // Array with objects
-    expect(deepClone([[1, 2], [3, 4]])).toEqual([[1, 2], [3, 4]]); // Array of arrays
-    expect(deepClone([{"a": [1, 2]}, {"b": [3, 4]}])).toEqual([{"a": [1, 2]}, {"b": [3, 4]}]); // Array of objects containing arrays
+    expect(deepClone([])).toEqual([]);
+    expect(deepClone([1, 2, 3])).toEqual([1, 2, 3]);
+    expect(deepClone([1, {"key": "value"}, 2])).toEqual([1, {"key": "value"}, 2]);
+    expect(deepClone([[1, 2], [3, 4]])).toEqual([[1, 2], [3, 4]]);
+    expect(deepClone([{"a": [1, 2]}, {"b": [3, 4]}])).toEqual([{"a": [1, 2]}, {"b": [3, 4]}]);
 });
 
 test('functions', () => {
     const fn = () => "test";
     const clonedFn = deepClone(fn);
-    expect(clonedFn).not.toBe(fn); // Ensure the function reference is different
-    expect(clonedFn()).toBe("test"); // Ensure the function behavior is preserved
+    expect(clonedFn).toBe(fn); // Functions should return the same reference
 });
 
 test('dates', () => {
     const date = new Date();
     const clonedDate = deepClone(date);
-    expect(clonedDate).not.toBe(date); // Ensure the Date reference is different
-    expect(clonedDate.getTime()).toBe(date.getTime()); // Ensure the Date value is the same
+    expect(clonedDate).not.toBe(date);
+    expect(clonedDate.getTime()).toBe(date.getTime());
 });
 
 test('complex objects', () => {
@@ -58,6 +57,26 @@ test('complex objects', () => {
         g: () => "function",
     };
     const clonedObj = deepClone(complexObj);
-    expect(clonedObj).toEqual(complexObj); // Check if the deep cloned object is deeply equal
-    expect(clonedObj).not.toBe(complexObj); // Check if the deep cloned object is not the same reference
+    expect(clonedObj).toEqual(complexObj);
+    expect(clonedObj).not.toBe(complexObj);
+});
+
+test('error cases', () => {
+    class CustomClass {
+        constructor(public data: number) {}
+    }
+    const customInstance = new CustomClass(42);
+    expect(() => deepClone(customInstance)).toThrow('Unable to clone this type');
+
+    const regex = /abc/gi;
+    expect(() => deepClone(regex)).toThrow('Unable to clone this type');
+
+    const error = new Error('Test error');
+    expect(() => deepClone(error)).toThrow('Unable to clone this type');
+
+    const weakMap = new WeakMap();
+    expect(() => deepClone(weakMap)).toThrow('Unable to clone this type');
+
+    const weakSet = new WeakSet();
+    expect(() => deepClone(weakSet)).toThrow('Unable to clone this type');
 });
