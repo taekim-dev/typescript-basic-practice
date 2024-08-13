@@ -10,7 +10,7 @@ test('should execute the function after the specified wait time', () => {
     expect(func).not.toHaveBeenCalled();
 
     jest.advanceTimersByTime(1000);
-    expect(func).not.toHaveBeenCalledTimes(1);
+    expect(func).toHaveBeenCalledTimes(1);
 });
 
 test('should reset the wait time if debounced function is called again within the wait time', () => {
@@ -24,7 +24,7 @@ test('should reset the wait time if debounced function is called again within th
     expect(func).not.toHaveBeenCalled();
 
     jest.advanceTimersByTime(500);
-    expect(func).not.toHaveBeenCalledTimes(1);
+    expect(func).toHaveBeenCalledTimes(1);
 });
 
 test('should execute the function with the latest arguments', () => {
@@ -35,7 +35,7 @@ test('should execute the function with the latest arguments', () => {
     debouncedFunc('second call');
     
     jest.advanceTimersByTime(1000);
-    expect(func).not.toHaveBeenCalledWith('second call');
+    expect(func).toHaveBeenCalledWith('second call');
 });
 
 test('should not execute the function if it is not called again within the wait time', () => {
@@ -47,7 +47,7 @@ test('should not execute the function if it is not called again within the wait 
     
     expect(func).not.toHaveBeenCalled();
 
-    jest.advanceTimersByTime(500);
+    jest.advanceTimersByTime(300);
     expect(func).not.toHaveBeenCalledTimes(1);
 });
 
@@ -59,5 +59,5 @@ test('should allow immediate execution if specified', () => {
     expect(func).not.toHaveBeenCalledTimes(1);
 
     jest.advanceTimersByTime(1000);
-    expect(func).not.toHaveBeenCalledTimes(1);
+    expect(func).toHaveBeenCalledTimes(1);
 });
