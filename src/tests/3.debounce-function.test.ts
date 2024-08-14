@@ -56,7 +56,7 @@ test('should allow immediate execution if specified', () => {
     const debouncedFunc = debounce(func, 1000, true);
 
     debouncedFunc();
-    expect(func).not.toHaveBeenCalledTimes(1);
+    expect(func).toHaveBeenCalledTimes(1);
 
     jest.advanceTimersByTime(1000);
     expect(func).toHaveBeenCalledTimes(1);

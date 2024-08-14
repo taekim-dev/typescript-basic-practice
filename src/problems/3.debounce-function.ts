@@ -6,8 +6,8 @@ export const debounce = <T extends (...args: any[]) => any>(
 
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-    return function debounced(this: any, ...args: Parameters<T>){
-        const callNow = immediate && !timeoutId;
+    return function debounced(this: unknown, ...args: Parameters<T>) : ReturnType<T> | void {
+        const callNow : boolean | undefined = immediate && !timeoutId;
 
         if (timeoutId) {
             clearTimeout(timeoutId);
