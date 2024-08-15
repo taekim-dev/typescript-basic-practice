@@ -39,19 +39,21 @@ test('should handle functions with multiple arguments', () => {
 test('should cache results separately for different arguments', () => {
     const factorial = jest.fn((n: number): number => {
         if (n === 0) return 1;
-        return n * factorial(n - 1);
+        return n * memoizedFactorial(n - 1);  // Use memoizedFactorial for recursion
     });
     const memoizedFactorial = memoize(factorial);
 
     expect(memoizedFactorial(5)).toBe(120);
-    expect(factorial).toHaveBeenCalledTimes(6);  // Factorial function called 6 times (5 to 0)
+    expect(factorial).toHaveBeenCalledTimes(6);  // Called for 5 down to 0
 
     expect(memoizedFactorial(5)).toBe(120);
-    expect(factorial).toHaveBeenCalledTimes(6);  // Cached result, no additional calls
+    expect(factorial).toHaveBeenCalledTimes(6);  // No additional calls
 
     expect(memoizedFactorial(6)).toBe(720);
-    expect(factorial).toHaveBeenCalledTimes(7);  // Only one additional call for the new input (6)
+    expect(factorial).toHaveBeenCalledTimes(7);  // Only one additional call for factorial(6)
 });
+
+
 
 test('should work correctly with non-primitive arguments', () => {
     const getLength = jest.fn((arr: any[]) => arr.length);
