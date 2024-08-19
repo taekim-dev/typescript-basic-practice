@@ -5,7 +5,7 @@
 // If a property exists in only one object or isn't an object in both, 
 // the property should be taken from the object that contains it.
 
-import { deepMerge } from '../problems/6.deep-merge.ts';
+import { deepMerge } from '../problems/6.deep-merge';
 
 test('should merge two objects with distinct properties', () => {
     const obj1 = { a: 1 };
@@ -41,4 +41,13 @@ test('should take the property from the object that contains it when it only exi
     const result = deepMerge(obj1, obj2);
     
     expect(result).toEqual({ a: 1, b: { nested: 1 }, c: 3 });
+});
+
+test('should take the value from the second object when both values are primitive types', () => {
+    const obj1 = { a: 2 };
+    const obj2 = { a: 3 };
+    
+    const result = deepMerge(obj1, obj2);
+    
+    expect(result).toEqual({ a: 3 });
 });
