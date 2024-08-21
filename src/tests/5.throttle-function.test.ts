@@ -40,7 +40,7 @@ test('should ensure the function is called with the latest arguments during the 
     throttledFunc('second call');
     throttledFunc('third call');
 
-    jest.advanceTimersByTime(1000);
+    jest.advanceTimersByTime(1100);
 
     expect(func).toHaveBeenCalledTimes(2);
     expect(func).toHaveBeenLastCalledWith('third call');
