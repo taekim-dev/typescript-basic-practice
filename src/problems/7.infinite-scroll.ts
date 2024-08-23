@@ -1,26 +1,39 @@
 class InfiniteScroll {
-    private threshold : number;
+    private scrollThreshold : number;
     private fetchData : () => Promise<void>;
     private isLoading : boolean;
 
-    constructor () {
+    constructor (threshold : number, fetchData: () => Promise<void>) {
+        this.scrollThreshold = threshold;
+        this.fetchData = fetchData;
+        this.isLoading = false;
 
+        this.initScrollListener();
     }
 
-    initScrollListener() {
-
+    private initScrollListener() {
+        window.addEventListener('scroll', this.onScroll.bind(this));
     }
 
     private async onScroll() {
+        if (this.isLoading) return;
+
+        const scrollPosition = window.innerHeight + window.scrollY;
+        const bottomPosition = document.documentElement.offsetHeight - this.scrollThreshold;
+
+        if (scrollPosition > bottomPosition) {
+            this.isLoading = true;
+            try {
+                await fetchData();
+            } finally {
+                this.isLoading = false;
+            }
+        }
 
     }
 
     public destroy() {
-
-    }
-
-    async fetchData () {
-
+        window.removeEventListener('scroll', this.onScroll.bind(this));
     }
 }
 
