@@ -39,9 +39,6 @@ class InfiniteScroll {
     }
 }
 
-
-let page = 1;
-
 async function fetchData() {
     const content = document.getElementById('content');
     if (content) {
