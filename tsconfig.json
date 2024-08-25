@@ -13,6 +13,6 @@
     "noEmit": true,
     "jsx": "react"
   },
-  "include": ["src"],
+  "include": ["src", "9.promise-all.ts"],
   "exclude": ["node_modules"]
 }
