@@ -1,4 +1,4 @@
-import { promiseAll } from '../problems/9.promise-all'
+import { PromiseAll } from '../problems/9.promise-all'
 
 test('should resolve when all promises resolve', async () => {
     const promises = [
@@ -7,7 +7,7 @@ test('should resolve when all promises resolve', async () => {
         Promise.resolve(3)
     ];
 
-    const result = await promiseAll(promises);
+    const result = await PromiseAll(promises);
     expect(result).toEqual([1, 2, 3]);
 });
 
@@ -19,7 +19,7 @@ test('should reject when any promise rejects', async () => {
     ];
 
     try {
-        await promiseAll(promises);
+        await PromiseAll(promises);
     } catch (error) {
         expect(error).toEqual(new Error('Promise failed'));
     }
