@@ -1,5 +1,12 @@
 import { PromiseAll } from '../problems/9.promise-all'
 
+test('should resolve when no promises are given', async () => {
+    const promises : any = [];
+
+    const result = await PromiseAll(promises);
+    expect(result).toEqual([]);
+});
+
 test('should resolve when all promises resolve', async () => {
     const promises = [
         Promise.resolve(1),
