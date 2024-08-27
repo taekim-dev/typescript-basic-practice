@@ -1,13 +1,22 @@
 export function PromiseAll<T>(promises: Promise<T>[]) : Promise<T[]> {
     return new Promise((resolve, reject) => {
         let res : T[] = [];
-        for (let promise of promises) {
-            promise.then((value) => {
-                res.push(value);
-            }).catch((error) => {
-                reject("Promise failed");
-            })
+        let completed = 0;
+
+        if (promises.length === 0) {
+            resolve([]);
         }
-        resolve(res)
+
+        promises.forEach((promise, index) => {
+            promise.then(value => {
+                res[index] = value;
+                completed++;
+                if (completed === promises.length) {
+                    resolve(res);
+                }
+
+            }).catch(error => reject(error))
+        })
+        
     });
 }
