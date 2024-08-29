@@ -7,4 +7,5 @@ test('should transform multiple arguments function', async () => {
     expect(curried(1, 2, 3)).toEqual(6);
     expect(curried(1)(2)(3)).toEqual(6);
     expect(curried(1, 2) (3)).toEqual(6);
+    expect(curried(1, 2, 3, 4)).toEqual(6);
 });
