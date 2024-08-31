@@ -5,6 +5,11 @@
 
 export function pipe(...fns: Function[]): Function {
     return function piped(...args : any[]) {
-        return fns.reduce((result, func) => func(result), args[0])
+        let result : any[] = [];
+        for (let i = 0; i < args.length; i++) {
+            const curr = fns.reduce((result, func) => func(result), args[i])
+            result.push(curr);
+        }
+        return result;
     }
 }
