@@ -13,3 +13,8 @@ test('should chain multiple functions', () => {
     const result = pipe(sum, subtract, multiply)(5);
     expect(result).toBe(18);
 });
+
+test('should handle empty functions', () => {
+    const result = pipe()(5);
+    expect(result).toBe(5);
+});
