@@ -5,12 +5,6 @@
 
 export function pipe(...fns: Function[]): Function {
     return function piped(...args : any[]) {
-        let result = args[0];
-
-        for (let i = 0; i < fns.length; i++) {
-            result = fns[i](result);
-        }
-
-        return result;
+        return fns.reduce((result, func) => func(result), args[0])
     }
 }
