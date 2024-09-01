@@ -11,12 +11,12 @@ test('should chain multiple functions', () => {
     const multiply = (a: number): number => a * 3;
 
     const result = pipe(sum, subtract, multiply)(5);
-    expect(result).toEqual([18]);
+    expect(result).toEqual(18);
 });
 
 test('should handle empty functions', () => {
     const result = pipe()(5);
-    expect(result).toEqual([5]);
+    expect(result).toEqual(5);
 });
 
 test('should chain multiple arguments', () => {
@@ -24,6 +24,6 @@ test('should chain multiple arguments', () => {
     const subtract = (a: number): number => a - 1;
     const multiply = (a: number): number => a * 3;
 
-    const result = pipe(sum, subtract, multiply)(1, 2, 3);
+    const result = [1, 2, 3].map(pipe(sum, subtract, multiply));
     expect(result).toEqual([6, 9, 12]);
 });
