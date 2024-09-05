@@ -1,11 +1,10 @@
-export function deepEqual<T extends object | null>(obj1: T, obj2: T): boolean {
-    if (obj1 === obj2) return true; // primitive types, null, and undefined
+export function deepEqual<T extends any[] | { [key: string]: any } | null>(obj1: T, obj2: T): boolean {
+    if (obj1 === obj2) return true; // Handles primitive types, null, and undefined
 
     if (typeof obj1 !== 'object' || typeof obj2 !== 'object' || obj1 == null || obj2 == null) {
-        return false;
+        return false; // If one is an object and the other isn't, they can't be equal
     }
 
-    // Array comparison
     if (Array.isArray(obj1) && Array.isArray(obj2)) {
         if (obj1.length !== obj2.length) return false;
 
@@ -17,7 +16,7 @@ export function deepEqual<T extends object | null>(obj1: T, obj2: T): boolean {
         return true;
     }
 
-    if (typeof obj1 === 'object' && typeof obj2 === 'object') {
+    if (!Array.isArray(obj1) && !Array.isArray(obj2)) {
         const keys1 = Object.keys(obj1);
         const keys2 = Object.keys(obj2);
 
