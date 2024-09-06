@@ -7,5 +7,6 @@ test('should handle basic cases', () => {
 
 test('should handle edge cases', () => {
     expect(canJump([5,0,0,0,0,0])).toBe(true);
-    expect(canJump([1,1,1,1,0])).toBe(false);
+    expect(canJump([1,1,1,1,0,0])).toBe(false);
+    expect(canJump([5,4,3,2,1,0,0])).toBe(false);
 });
