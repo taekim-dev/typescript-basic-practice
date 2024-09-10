@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Inline vs Inline-Block</title>
+    <style>
+        .inline {
+            display: inline;
+            width: 100px; /* Won't affect inline elements */
+            height: 50px; /* Won't affect inline elements */
+            background-color: lightgreen;
+            margin: 10px;
+        }
+        .inline-block {
+            display: inline-block;
+            width: 100px; /* Width will apply */
+            height: 50px; /* Height will apply */
+            background-color: lightpink;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <span class="inline">Inline Element</span>
+    <span class="inline">Inline Element</span>
+    <span class="inline-block">Inline-Block Element</span>
+
+</body>
+</html>
