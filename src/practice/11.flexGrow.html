@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Grow and Shrink</title>
+    <style>
+        .flex-container {
+            display: flex;
+            width: 100%;
+            height: 300px;
+            background-color: lightyellow;
+        }
+        .flex-item-1 {
+            flex-grow: 1;   /* This item will grow to take extra space */
+            background-color: lightblue;
+            padding: 20px;
+        }
+        .flex-item-2 {
+            flex-grow: 2;   /* This item will grow twice as fast as item 1 */
+            background-color: lightcoral;
+            padding: 20px;
+        }
+        .flex-item-3 {
+            flex-grow: 3;   /* This item will grow three times as fast */
+            background-color: lightgreen;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flex-container">
+        <div class="flex-item-1">Item 1</div>
+        <div class="flex-item-2">Item 2</div>
+        <div class="flex-item-3">Item 3</div>
+    </div>
+
+</body>
+</html>
