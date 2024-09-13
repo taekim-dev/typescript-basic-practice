@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Align Self and Order</title>
+    <style>
+        .flex-container {
+            display: flex;
+            justify-content: space-around;
+            height: 300px;
+            background-color: lightgray;
+        }
+        .flex-item-1 {
+            align-self: flex-start;  /* Aligns this item to the start */
+            order: 2;                /* Places this item second */
+            background-color: lightblue;
+            padding: 20px;
+        }
+        .flex-item-2 {
+            align-self: flex-end;    /* Aligns this item to the end */
+            order: 1;                /* Places this item first */
+            background-color: lightcoral;
+            padding: 20px;
+        }
+        .flex-item-3 {
+            align-self: center;      /* Aligns this item to the center */
+            order: 3;                /* Places this item third */
+            background-color: lightgreen;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flex-container">
+        <div class="flex-item-1">Item 1</div>
+        <div class="flex-item-2">Item 2</div>
+        <div class="flex-item-3">Item 3</div>
+    </div>
+
+</body>
+</html>
